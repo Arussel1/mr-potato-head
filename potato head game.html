@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="myscripts.js"></script>
+    <title>Mr. Potato Head Game</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+</head>
+<body>
+    <div id="potato-head">
+        <img id="eyes" class="part" src="eyes_2.png" onmouseover="enlargeImage(this)" onmouseout="shrinkImageIcon(this)" style="top: 50px; left: 45px; height:75px; width:auto;z-index: 0;">
+        <img id="nose" class="part" src="nose_1.png" onmouseover="enlargeImage(this)" onmouseout="shrinkImageIcon(this)" style="top: 120px; left: 60px;height:75px; width:auto;z-index: 0;">
+        <img id="mouth" class="part" src="mouth_3.png" onmouseover="enlargeImage(this)" onmouseout="shrinkImageIcon(this)" style="top: 190px; left: 20px;height:60px; width:auto;z-index: 0;">
+        <img id="hat" class="part" src="hat.png" onmouseover="enlargeImage(this)" onmouseout="shrinkImageIcon(this)" style="top: 0; left: 25px;height:50px; width:150px;z-index: 0;">
+    </div>
+
+    <button onclick="togglePart('eyes')">Toggle Eyes</button>
+    <button onclick="togglePart('nose')">Toggle Nose</button>
+    <button onclick="togglePart('mouth')">Toggle Mouth</button>
+    <button onclick="togglePart('hat')">Toggle Hat</button>
+
+    <button onclick="saveImage()">Save Image</button>
+
+    <script>
+        function togglePart(part) {
+            $('#' + part).toggle();
+        }
+
+        function saveImage() {
+            html2canvas(document.querySelector("#potato-head")).then(canvas => {
+                let link = document.createElement('a');
+                link.download = 'potato-head.png';
+                link.href = canvas.toDataURL()
+                link.click();
+            });
+        }
+    </script>
+</body>
+</html>
